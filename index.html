@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemeFlow - 도파민의 새로운 흐름</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Pretendard Font -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #ffffff;
+            color: #191f28;
+            overflow-x: hidden;
+        }
+
+        /* 양방향 스크롤 애니메이션 */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                        transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+
+        /* 토스 감성 카드 */
+        .meme-card {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .meme-card:active {
+            transform: scale(0.95);
+        }
+
+        .nav-blur {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        /* 텍스트 그라데이션 (포인트) */
+        .text-gradient {
+            background: linear-gradient(135-deg, #3182f6, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-[#3182f6] selection:text-white">
+
+    <!-- 네비게이션 -->
+    <nav class="fixed top-0 w-full z-50 nav-blur border-b border-gray-100/50 transition-all duration-300" id="navbar">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="font-bold text-2xl tracking-tighter cursor-pointer flex items-center gap-2">
+                <span class="text-[#3182f6]">🤪</span> MemeFlow
+            </div>
+            <div class="hidden md:flex gap-8 text-[15px] font-semibold text-[#4e5968]">
+                <a href="#" class="hover:text-[#191f28] transition-colors">인기 짤</a>
+                <a href="#" class="hover:text-[#191f28] transition-colors">도파민 충전</a>
+                <a href="#" class="hover:text-[#191f28] transition-colors">엄격한 뻘소리</a>
+            </div>
+            <button class="bg-[#3182f6] text-white px-5 py-2 rounded-xl text-[14px] font-semibold transition-transform active:scale-95">
+                앱 열기
+            </button>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <section class="pt-48 pb-32 px-6 flex flex-col items-center justify-center text-center">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-[48px] md:text-[72px] font-bold leading-[1.1] tracking-tight mb-8 fade-up">
+                인생은 짧고,<br>
+                <span class="text-[#3182f6]">짤은 끝이 없다.</span>
+            </h1>
+            <p class="text-[18px] md:text-[24px] text-[#6b7684] font-medium mb-12 fade-up delay-100 max-w-2xl mx-auto leading-relaxed">
+                전 국민이 킹받는 그날까지.<br>
+                당신의 소중한 시간을 낭비해 드릴게요.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center fade-up delay-200">
+                <button class="bg-[#3182f6] hover:bg-[#1b64da] text-white px-10 py-5 rounded-[20px] text-[18px] font-bold transition-all shadow-xl shadow-blue-500/20 active:scale-95">
+                    지금 킹받으러 가기
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 밈 데이터 섹션 -->
+    <section class="py-24 bg-[#f9fafb]">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center fade-up">
+                <div>
+                    <div class="text-[52px] font-extrabold text-[#191f28] mb-2 tracking-tighter">5.2억</div>
+                    <div class="text-[16px] text-[#6b7684] font-semibold">누적 뻘소리 수</div>
+                </div>
+                <div>
+                    <div class="text-[52px] font-extrabold text-[#191f28] mb-2 tracking-tighter">24시간</div>
+                    <div class="text-[16px] text-[#6b7684] font-semibold">평균 뇌 정지 시간</div>
+                </div>
+                <div>
+                    <div class="text-[52px] font-extrabold text-[#191f28] mb-2 tracking-tighter">0원</div>
+                    <div class="text-[16px] text-[#6b7684] font-semibold">도파민 결제 비용</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 기능 소개 섹션 -->
+    <section class="py-32 px-6">
+        <div class="max-w-5xl mx-auto">
+            <div class="mb-20 text-center fade-up">
+                <h2 class="text-[36px] md:text-[48px] font-bold tracking-tight mb-6">
+                    MemeFlow가<br>시간을 삭제해 드릴게요
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 카드 1 -->
+                <div class="bg-[#f2f4f6] rounded-[40px] p-10 meme-card fade-up delay-100 h-[400px] flex flex-col justify-between overflow-hidden relative">
+                    <div>
+                        <h3 class="text-[28px] font-bold mb-4">1초 전자킹받음</h3>
+                        <p class="text-[17px] text-[#4e5968] font-medium leading-relaxed">
+                            친구에게 보낼 짤을 고르느라 고생하셨나요?<br>AI가 당신의 친구가 가장 화낼 짤을 추천합니다.
+                        </p>
+                    </div>
+                    <div class="text-8xl self-end transform translate-y-4">😡</div>
+                </div>
+
+                <!-- 카드 2 -->
+                <div class="bg-[#3182f6] rounded-[40px] p-10 meme-card text-white fade-up delay-200 h-[400px] flex flex-col justify-between overflow-hidden relative">
+                    <div>
+                        <h3 class="text-[28px] font-bold mb-4">압도적 도파민 수익률</h3>
+                        <p class="text-[17px] text-white/80 font-medium leading-relaxed">
+                            스크롤 한 번에 행복지수 200% 상승.<br>하지만 현생 복귀율은 0%에 수렴합니다.
+                        </p>
+                    </div>
+                    <div class="text-8xl self-end transform translate-y-4">📈</div>
+                </div>
+
+                <!-- 카드 3 -->
+                <div class="bg-[#191f28] rounded-[40px] p-10 meme-card text-white fade-up delay-100 md:col-span-2 h-[350px] flex items-center justify-between overflow-hidden relative">
+                    <div class="max-w-md">
+                        <h3 class="text-[28px] font-bold mb-4">철저한 뇌 비우기 보안</h3>
+                        <p class="text-[17px] text-white/70 font-medium leading-relaxed">
+                            생각을 하면 MemeFlow를 이용할 수 없습니다.<br>당신의 뇌를 가장 안전하게 비워드릴게요.
+                        </p>
+                    </div>
+                    <div class="text-[120px] absolute -right-4 opacity-50 rotate-12">🧠</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 하단 CTA -->
+    <section class="py-40 px-6 text-center bg-white">
+        <div class="max-w-3xl mx-auto fade-up">
+            <h2 class="text-[40px] md:text-[56px] font-bold tracking-tight mb-10">
+                인생은 한 번뿐,<br>도파민은 영원하다
+            </h2>
+            <button class="bg-[#3182f6] hover:bg-[#1b64da] text-white px-12 py-6 rounded-full text-[20px] font-bold transition-all shadow-2xl shadow-blue-500/30 active:scale-95">
+                무료로 뇌 비우기
+            </button>
+            <p class="mt-8 text-[#8b95a1] font-medium">현재 1,245,392명이 이미 뇌를 비웠습니다.</p>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="bg-[#f9fafb] py-16 px-6 border-t border-gray-100">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-[#8b95a1] font-medium text-[14px] text-center md:text-left">
+                <div class="font-bold text-[#333d4b] text-[20px] mb-3">🤪 MemeFlow</div>
+                (주)도파민중독자들 | 대표: 아무개<br>
+                서울특별시 중독구 도파민동 82-82<br>
+                <span class="text-[#b0b8c1]">생각 없이 만든 사이트입니다. 과도한 짤 사용은 현생에 해롭습니다.</span>
+            </div>
+            <div class="flex gap-6">
+                <i data-lucide="github" class="w-6 h-6 text-[#8b95a1] cursor-pointer hover:text-[#191f28]"></i>
+                <i data-lucide="send" class="w-6 h-6 text-[#8b95a1] cursor-pointer hover:text-[#191f28]"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // 양방향 스크롤 관찰자
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    // 화면 밖으로 나가면 다시 초기화 (양방향 애니메이션)
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // 네비게이션 상단 고정 효과
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-sm');
+            } else {
+                nav.classList.remove('shadow-sm');
+            }
+        });
+    </script>
+</body>
+</html>
+
